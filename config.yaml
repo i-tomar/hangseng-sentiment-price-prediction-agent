@@ -1,0 +1,98 @@
+# Hang Seng / KOSPI sentiment price-prediction pipeline configuration.
+lookback_days: 10          # social + news window (assignment: last 10 days)
+price_history_days: 120    # calendar days of daily bars for support/resistance + features
+
+exchanges:
+  HK:
+    name: Hong Kong Exchange (HKEX)
+    timezone: Asia/Hong_Kong
+    session_close: "16:00"   # local time; posts after close are assigned to the next bar
+    currency: HKD
+    tickers:
+      - symbol: 0700.HK
+        name: Tencent Holdings
+        keywords: [Tencent, 騰訊, 腾讯, "0700", 00700]
+      - symbol: 9988.HK
+        name: Alibaba Group
+        keywords: [Alibaba, 阿里巴巴, 阿里, "9988", 09988, BABA]
+      - symbol: 3690.HK
+        name: Meituan
+        keywords: [Meituan, 美團, 美团, "3690", 03690]
+      - symbol: 1810.HK
+        name: Xiaomi
+        keywords: [Xiaomi, 小米, "1810", 01810]
+      - symbol: 0005.HK
+        name: HSBC Holdings
+        keywords: [HSBC, 匯豐, 汇丰, "0005", 00005]
+  KR:
+    name: Korea Exchange (KRX / KOSPI)
+    timezone: Asia/Seoul
+    session_close: "15:30"
+    currency: KRW
+    tickers:
+      - symbol: 005930.KS
+        name: Samsung Electronics
+        keywords: [Samsung Electronics, 삼성전자, 삼전, "005930"]
+      - symbol: 000660.KS
+        name: SK hynix
+        keywords: [SK hynix, SK Hynix, SK하이닉스, 하이닉스, 하닉, "000660"]
+      - symbol: 035420.KS
+        name: NAVER
+        keywords: [NAVER, Naver, 네이버, "035420"]
+      - symbol: 005380.KS
+        name: Hyundai Motor
+        keywords: [Hyundai Motor, 현대차, 현대자동차, "005380"]
+      - symbol: 035720.KS
+        name: Kakao
+        keywords: [Kakao, 카카오, "035720"]
+
+# Social sources: >= 2 per exchange, all run through Apify actors.
+sources:
+  HK:
+    - id: lihkg
+      actor: claude_code_reviewer/lihkg-scraper-en
+      kind: lihkg_search       # one run, keywords = all HK ticker keywords (non-numeric)
+      max_items: 20            # threads per keyword (search mode)
+      keywords_per_ticker: 2   # first N non-numeric keywords per ticker (more triggers LIHKG 429 rate limits)
+      max_usd: 1.0             # hard spend cap for the run (Apify max_total_charge_usd)
+    - id: telegram_hk
+      actor: tri_angle/telegram-scraper
+      kind: telegram
+      # Public channels verified on t.me/s/ (Nov 2026): HK stock commentary + HK financial news + general news.
+      # Each channel is a separate actor run with its own cap (busy channels only return their newest posts).
+      channels: [hongkongstocks, aastocks_news, zaobaosg]
+      max_usd_per_channel: 0.2
+  KR:
+    - id: telegram_kr
+      actor: tri_angle/telegram-scraper
+      kind: telegram
+      # Korean market / broker-research channels
+      channels: [YeouidoStory2, hanaresearch, shinhanresearch, hedgehara]
+      max_usd_per_channel: 0.2
+    - id: daum_news
+      actor: ardent_fork/daum-news
+      kind: daum
+      sections: [stock, economy]
+      max_items: 150
+      max_usd: 0.5
+
+exa:
+  enabled: true
+  num_results: 10            # per ticker
+  max_characters: 1500
+  category: news
+
+sentiment:
+  model: cardiffnlp/twitter-xlm-roberta-base-sentiment-multilingual
+  use_transformers: auto     # auto | true | false  (false => multilingual lexicon fallback)
+  max_chars: 512
+  direction_threshold: 0.10  # |weighted sentiment| above this => bullish/bearish
+
+levels:
+  swing_window: 3            # bars each side for a swing high/low pivot
+  lookback_bars: 60
+
+model:
+  min_train_dates: 2         # walk-forward: minimum distinct past dates before first prediction
+  ridge_alpha: 10.0          # strong shrinkage: tiny sample
+  logreg_C: 0.5
