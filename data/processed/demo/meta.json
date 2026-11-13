@@ -1,0 +1,11 @@
+{
+ "mode": "demo",
+ "run_utc": "2026-11-12T21:33:30.898489+00:00",
+ "price_source": "yfinance",
+ "sentiment_backend": "transformers:cardiffnlp/twitter-xlm-roberta-base-sentiment-multilingual",
+ "n_posts": 572,
+ "n_bars": 1200,
+ "lookback_days": 10,
+ "source_log": [],
+ "report": "reports/demo_report.html"
+}
