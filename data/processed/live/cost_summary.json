@@ -1,0 +1,8 @@
+{
+ "measured_utc": "2026-11-13T10:55:00Z",
+ "apify_runs": 10,
+ "apify_total_usd": 2.19,
+ "apify_by_actor_usd": {"tri_angle/telegram-scraper": 1.97, "ardent_fork/daum-news": 0.17, "claude_code_reviewer/lihkg-scraper-en": 0.06},
+ "exa_search_requests": 10,
+ "note": "Includes one debugging run (multi-channel Telegram runs hit the cap on the first channel). A fresh full live run costs about $1.6 on Apify + 10 Exa searches; same-day re-runs use the data/raw cache and cost $0."
+}

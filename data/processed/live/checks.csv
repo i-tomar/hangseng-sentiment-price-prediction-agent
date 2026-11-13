@@ -1,0 +1,1 @@
+ticker,asof_date,asof_close,prob_up,pred_ret,pred_close,pred_direction,n_train_rows,run_utc,mode,price_source,status,actual_date,actual_close,actual_ret,direction_hit,abs_err_pct,naive_abs_err_pct
