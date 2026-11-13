@@ -1,0 +1,135 @@
+{
+ "mode": "live",
+ "run_utc": "2026-11-13T10:51:20.135587+00:00",
+ "price_source": "yfinance",
+ "sentiment_backend": "transformers:cardiffnlp/twitter-xlm-roberta-base-sentiment-multilingual",
+ "n_posts": 226,
+ "n_bars": 1200,
+ "lookback_days": 10,
+ "source_log": [
+  {
+   "exchange": "HK",
+   "source": "lihkg",
+   "actor": "claude_code_reviewer/lihkg-scraper-en",
+   "raw_items": 15,
+   "posts": 15,
+   "error": ""
+  },
+  {
+   "exchange": "HK",
+   "source": "telegram_hk",
+   "actor": "tri_angle/telegram-scraper",
+   "raw_items": 201,
+   "posts": 13,
+   "error": "",
+   "channels": {
+    "hongkongstocks": 42,
+    "aastocks_news": 60,
+    "zaobaosg": 99
+   }
+  },
+  {
+   "exchange": "KR",
+   "source": "telegram_kr",
+   "actor": "tri_angle/telegram-scraper",
+   "raw_items": 259,
+   "posts": 72,
+   "error": "",
+   "channels": {
+    "YeouidoStory2": 78,
+    "hanaresearch": 39,
+    "shinhanresearch": 39,
+    "hedgehara": 103
+   }
+  },
+  {
+   "exchange": "KR",
+   "source": "daum_news",
+   "actor": "ardent_fork/daum-news",
+   "raw_items": 84,
+   "posts": 34,
+   "error": ""
+  },
+  {
+   "exchange": "HK",
+   "source": "exa_news:0700.HK",
+   "actor": "exa.ai",
+   "raw_items": 10,
+   "posts": 10,
+   "error": ""
+  },
+  {
+   "exchange": "HK",
+   "source": "exa_news:9988.HK",
+   "actor": "exa.ai",
+   "raw_items": 10,
+   "posts": 10,
+   "error": ""
+  },
+  {
+   "exchange": "HK",
+   "source": "exa_news:3690.HK",
+   "actor": "exa.ai",
+   "raw_items": 10,
+   "posts": 10,
+   "error": ""
+  },
+  {
+   "exchange": "HK",
+   "source": "exa_news:1810.HK",
+   "actor": "exa.ai",
+   "raw_items": 10,
+   "posts": 10,
+   "error": ""
+  },
+  {
+   "exchange": "HK",
+   "source": "exa_news:0005.HK",
+   "actor": "exa.ai",
+   "raw_items": 10,
+   "posts": 10,
+   "error": ""
+  },
+  {
+   "exchange": "KR",
+   "source": "exa_news:005930.KS",
+   "actor": "exa.ai",
+   "raw_items": 10,
+   "posts": 10,
+   "error": ""
+  },
+  {
+   "exchange": "KR",
+   "source": "exa_news:000660.KS",
+   "actor": "exa.ai",
+   "raw_items": 10,
+   "posts": 10,
+   "error": ""
+  },
+  {
+   "exchange": "KR",
+   "source": "exa_news:035420.KS",
+   "actor": "exa.ai",
+   "raw_items": 10,
+   "posts": 10,
+   "error": ""
+  },
+  {
+   "exchange": "KR",
+   "source": "exa_news:005380.KS",
+   "actor": "exa.ai",
+   "raw_items": 10,
+   "posts": 10,
+   "error": ""
+  },
+  {
+   "exchange": "KR",
+   "source": "exa_news:035720.KS",
+   "actor": "exa.ai",
+   "raw_items": 10,
+   "posts": 10,
+   "error": ""
+  }
+ ],
+ "report": "reports/live_report.html"
+}

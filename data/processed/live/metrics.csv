@@ -1,0 +1,6 @@
+model,direction_accuracy,ridge_directional_hit,MAE_ret_pct,RMSE_ret_pct,n_oos_predictions,n_oos_dates
+Sentiment+price model,0.6,0.4,3.0503574834801044,3.997770618225381,50,5
+Price-only model (ablation),0.66,0.42,2.9719054011354094,3.9999588522548066,50,5
+Naive: no change (random walk),,,2.157153942661214,2.889943019947542,50,5
+Baseline: majority class,0.52,,,,50,5
+Baseline: momentum (sign of today's return),0.64,,,,50,5
